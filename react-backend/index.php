@@ -1,7 +1,7 @@
 <?php
     $serverName = "localhost";
     $username ="root";
-    $password = "Carolina#2013";
+    $password = "root";
     $databaseName="react_php";
     
     $conn = mysqli_connect($serverName, $username, $password, $databaseName);
