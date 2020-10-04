@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import axios from "axios";
+class App extends Component {
+  state = {
+    text: "",
+  };
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+  handleAdd = async (e) => {
+    await this.setState({
+      text: e.target.value,
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state.text);
+    let formData = new FormData();
+    formData.append("text", this.state.text);
+    const url = "http://localhost:80/react_PHP%20_Mysql/react-backend/";
+    axios
+      .post(url, formData)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  };
+
+  render() {
+    return (
+      <div className="App-header">
+        <input
+          type="text"
+          id="text"
+          placeholder="enter some text"
+          onChange={this.handleAdd}
+        />
+        <br />
+        <button
+          className="btn btn-success"
+          id="submit"
+          onClick={this.handleSubmit}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          Save
+        </button>
+      </div>
+    );
+  }
 }
 
 export default App;
